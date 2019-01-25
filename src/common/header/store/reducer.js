@@ -1,16 +1,18 @@
+import * as contants from './constants'
+
 const defaultState = {
     focused: false
 };
 
 export default (state = defaultState, action) => {
 
-    if(action.type === 'searc_focus') {
+    if(action.type === contants.SEARCH_FOCUS) {
         return {
             focused: true
         }
     }
 
-    if(action.type === 'searc_blur') {
+    if(action.type === contants.SEARCH_BLUR) {
         return {
             focused: false
         }

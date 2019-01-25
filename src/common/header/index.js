@@ -1,6 +1,7 @@
 import React  from 'react'
 import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group';
+import { actionCreators } from './store'
 import { HeaderWrapper, Logo, Nav, NavItem, NavSearch, Addition, Button, SearchWrapper } from './style'
 // 无状态组件
 const Header = (props) => {
@@ -55,16 +56,10 @@ const mapStateToProps = (state) => {
 const mapDispathToProps = (dispath) => {
     return {
         handleInputFocus() {
-            const action = {
-                type: 'searc_focus'
-            }
-            dispath(action)
+            dispath(actionCreators.searchFocus())
         },
         handleInputBlur() {
-            const action = {
-                type: 'searc_blur'
-            }
-            dispath(action)
+            dispath(actionCreators.searchBlur())
         }
     }
 }
