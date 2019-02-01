@@ -4,7 +4,8 @@ import { fromJS } from 'immutable'
 
 const changeList = (data) => ({
     type: contants.CHANGE_LIST,
-    data: fromJS(data)
+    data: fromJS(data),
+    totalPage: Math.ceil(data.length / 10)
 });
 
 export const searchFocus = () => ({
@@ -14,7 +15,17 @@ export const searchFocus = () => ({
 export const searchBlur = () => ({
     type: contants.SEARCH_BLUR
 })
+export const mouseEnter = () => ({
+    type: contants.MOUSE_ENTER
+})
+export const mouseLeave = () => ({
+    type: contants.MOUSE_LEAVE
+})
 
+export const changePage = (page) => ({
+    type: contants.CHANGE_PAGE,
+    page
+})
 export const getList = () => {
     return (dispatch) => {
         axios.get('/api/headerList.json').then((res) => {
