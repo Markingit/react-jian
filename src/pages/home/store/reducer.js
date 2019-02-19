@@ -1,42 +1,30 @@
 
 import { fromJS } from 'immutable'
+import * as constants from './constants'
 
 const defaultState = fromJS({
-    topicList: [{
-        id: 1,
-        title: '社会热点',
-        imgUrl:''
-    },{
-        id: 2,
-        title: '手绘',
-        imgUrl:''
-    }],
-    articleList: [{
-        id: 1,
-        title: '国外拿奖到手软，国内遭禁，鬼知道这部国产电影经历了什么',
-        desc: '说来奇怪，有一个公认的民间传说“禁片都是好片”。 这可能是我们普通民众精神上最后一点公开的叛逆了。 但是因为各种原因被禁映的电影，却是里面有很多...',
-        imgUrl: '//upload-images.jianshu.io/upload_images/10820899-a7c49cb29be9fc86?imageMogr2/auto-orient/strip|imageView2/1/w/360/h/240'
-    },{
-        id: 2,
-        title: '国外拿奖到手软，国内遭禁，鬼知道这部国产电影经历了什么',
-        desc: '说来奇怪，有一个公认的民间传说“禁片都是好片”。 这可能是我们普通民众精神上最后一点公开的叛逆了。 但是因为各种原因被禁映的电影，却是里面有很多...',
-        imgUrl: '//upload-images.jianshu.io/upload_images/10820899-a7c49cb29be9fc86?imageMogr2/auto-orient/strip|imageView2/1/w/360/h/240'
-    },{
-        id: 3,
-        title: '国外拿奖到手软，国内遭禁，鬼知道这部国产电影经历了什么',
-        desc: '说来奇怪，有一个公认的民间传说“禁片都是好片”。 这可能是我们普通民众精神上最后一点公开的叛逆了。 但是因为各种原因被禁映的电影，却是里面有很多...',
-        imgUrl: '//upload-images.jianshu.io/upload_images/10820899-a7c49cb29be9fc86?imageMogr2/auto-orient/strip|imageView2/1/w/360/h/240'
-    },{
-        id: 4,
-        title: '国外拿奖到手软，国内遭禁，鬼知道这部国产电影经历了什么',
-        desc: '说来奇怪，有一个公认的民间传说“禁片都是好片”。 这可能是我们普通民众精神上最后一点公开的叛逆了。 但是因为各种原因被禁映的电影，却是里面有很多...',
-        imgUrl: '//upload-images.jianshu.io/upload_images/10820899-a7c49cb29be9fc86?imageMogr2/auto-orient/strip|imageView2/1/w/360/h/240'
-    }]
+    topicList: [],
+    articleList: [],
+    recommendList:[],
+    articlePage: 1
 });
 
 export default (state = defaultState, action) => {
 
     switch(action.type) {
+        case constants.CHANGE_HOME_DATA:
+        return state.merge({
+            topicList: fromJS(action.topicList),
+            articleList: fromJS(action.articleList),
+            recommendList: fromJS(action.recommendList)
+        })
+        case constants.ADD_ARTICLE_LIST:
+        return state.merge({
+            articleList: state.get('articleList').concat(action.list),
+            articlePage: action.nextPage
+        })
+        // state.set('topicList', fromJS(action.topicList))
+            // console.log(action);
         default:
             return state
     }
