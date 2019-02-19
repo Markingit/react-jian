@@ -7,9 +7,7 @@ export const HeaderWrapper = styled.div`
     border-bottom: solid 1px #f0f0f0;
 `
 
-export const Logo = styled.a.attrs({
-    href: '/'
-})`
+export const Logo = styled.div`
     position: absolute;
     top: 0;
     left: 0;
@@ -107,7 +105,7 @@ export const SearchInfo = styled.div`
 export const SearchInfoTitle = styled.div`
     margin-top:20px;
     margin-bottom: 15px;
-    margin-height: 20px;
+    margin-right: 20px;
     color: #969696;
 `
 export const SearchInfoSwitch = styled.span`
