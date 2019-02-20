@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group';
 import { actionCreators } from './store'
+import { actionCreators as loginActionCreators } from '../../pages/login/store'
 import { 
         HeaderWrapper, 
          Logo, 
@@ -61,7 +62,7 @@ class Header extends Component {
     }
 
     render() {
-        const { focused, list, handleInputFocus, handleInputBlur } = this.props
+        const { focused, list, handleInputFocus, handleInputBlur, login, logOut } = this.props
         return (
             <HeaderWrapper>
             <Link to='/'>
@@ -74,9 +75,11 @@ class Header extends Component {
                 <NavItem className="right">
                     <i className="iconfont">&#xe636;</i>
                 </NavItem>
-                <NavItem className="right">
-                    登录
-                </NavItem>
+                {
+                    login ? 
+                        <NavItem onClick={logOut} className="right">退出</NavItem> : 
+                        <Link to='/login'><NavItem className="right">登陆</NavItem></Link>
+                }
                 <SearchWrapper>
                     <CSSTransition
                         in={focused}
@@ -118,6 +121,7 @@ const mapStateToProps = (state) => {
         page: state.getIn(['header', 'page']),
         totalPage: state.getIn(['header', 'totalPage']),
         mouseIn: state.getIn(['header', 'mouseIn']),
+        login: state.getIn(['login', 'login']),
         // state.get('header').get('focused')
     }
 }
@@ -153,6 +157,9 @@ const mapDispathToProps = (dispath) => {
             } else {
                 dispath(actionCreators.changePage(1))
             }
+        },
+        logOut() {
+            dispath(loginActionCreators.logout())
         }
     }
 }

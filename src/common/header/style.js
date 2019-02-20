@@ -3,6 +3,7 @@ import logoPic from '../../statics/header-left.png'
 
 export const HeaderWrapper = styled.div`
     position: relative;
+    z-index: 1;
     height: 56px;
     border-bottom: solid 1px #f0f0f0;
 `
